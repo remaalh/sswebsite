@@ -1,279 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>how well do you know rema</title>
-<style>
-  :root{
-    --bg: #fff6fb;
-    --card:#ffffff;
-    --accent:#ff77a9;
-    --accent-2:#7ac8ff;
-    --ink:#2b2b2b;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    color:var(--ink);
-    background:
-      radial-gradient(900px 500px at 15% -10%, #ffe3ef 0%, transparent 60%),
-      radial-gradient(900px 500px at 100% 0%, #e6f5ff 0%, transparent 60%),
-      var(--bg);
-    min-height:100svh; display:flex; align-items:center; justify-content:center; padding:24px;
-  }
-  .app{
-    width:min(720px, 100%);
-    background:var(--card);
-    border-radius:24px; padding:28px;
-    box-shadow:0 16px 40px rgba(0,0,0,.08);
-    position:relative; overflow:hidden;
-    animation:pop .45s ease-out both;
-  }
-  @keyframes pop{from{transform:scale(.98); opacity:0} to{transform:scale(1); opacity:1}}
-  h1{margin:0 0 8px; text-align:center; text-transform: lowercase;}
-  .sub{margin:0 0 18px; text-align:center; color:#666}
-  .page{display:none}
-  .page.active{display:block}
-  .card{background:#f9fbff; border:1px solid #eef3ff; border-radius:18px; padding:16px}
-  .qtext{margin:0 0 10px; font-weight:600}
-  .answers label{
-    display:flex; align-items:center; gap:10px;
-    background:#fff; border:1px solid #ececec; border-radius:14px;
-    padding:10px 12px; margin:6px 0; cursor:pointer; transition:transform .05s ease-in;
-  }
-  .answers label:active{ transform:scale(.99) }
-  .answers input{ accent-color:var(--accent); }
-  .progress{ text-align:center; font-size:14px; color:#777; margin:10px 0 6px }
-  .btnrow{ display:flex; gap:10px; justify-content:center; margin-top:16px; flex-wrap:wrap }
-  button{
-    border:0; padding:12px 18px; border-radius:14px; font-weight:600; cursor:pointer;
-    transition:transform .05s ease-in, box-shadow .2s ease;
-  }
-  .primary{ background:linear-gradient(135deg, var(--accent), #ff9fbd); color:#fff; box-shadow:0 6px 14px rgba(255,119,169,.35) }
-  .ghost{ background:#eef6ff; color:#0d5ea7 }
-  button:active{ transform:translateY(1px) }
-  .hint{ text-align:center; color:#a00; font-size:13px; margin-top:8px; display:none }
-  .result{
-    margin-top:12px; text-align:center; font-weight:700; font-size:18px;
-    padding:14px; border-radius:14px; display:none;
-  }
-  .good{ background:#e9fff0; color:#0b7a36; border:1px solid #c8ffd8 }
-  .ok{ background:#fff9e9; color:#8a5b00; border:1px solid #ffecb5 }
-  .bad{ background:#ffe9ec; color:#9a1f3d; border:1px solid #ffd0da }
-  footer{ text-align:center; margin-top:10px; color:#888; font-size:12px }
-  /* tiny floating hearts for perfect score */
-  .heart{
-    position:absolute; width:16px; height:16px; border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, #fff 0 20%, transparent 40%), var(--accent);
-    transform: translate(-50%, -50%) rotate(45deg);
-    animation: float 1.2s ease-out forwards;
-    pointer-events:none;
-  }
-  .heart::after,.heart::before{ content:''; position:absolute; width:16px; height:16px; background:var(--accent); border-radius:50% }
-  .heart::before{ left:-8px } .heart::after{ top:-8px }
-  @keyframes float{ to{ transform: translate(-50%, calc(-50% - 100px)) rotate(45deg); opacity:0 } }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open Me 💌</title>
+  <meta name="description" content="A cute, flirty virtual love letter with an animated envelope." />
+  <style>
+    :root{
+      --bg1:#ffe6f2; /* pastel pink */
+      --bg2:#fff8ff; /* soft blush */
+      --accent:#ff6fa9; /* hot pink */
+      --accent-2:#ffb3d1; /* light pink */
+      --paper:#fffefd; /* letter color */
+      --ink:#3a2b2f; /* text color */
+      --shadow: 0 10px 30px rgba(0,0,0,.10);
+      --radius:26px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100svh;
+      display:grid;
+      place-items:center;
+      background: radial-gradient(1200px 800px at 70% -10%, var(--bg2), var(--bg1));
+      font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+    }
+
+    .wrap{
+      width:min(92vw, 740px);
+      text-align:center;
+    }
+
+    h1{
+      font-weight:800;
+      letter-spacing:.3px;
+      font-size:clamp(26px, 4vw, 40px);
+      margin: 10px 0 18px;
+    }
+    .sub{
+      opacity:.75;
+      margin:-6px 0 22px;
+    }
+
+    /* Envelope Scene */
+    .scene{
+      perspective: 1200px;
+      margin-inline:auto;
+    }
+
+    .envelope{
+      position:relative;
+      width:min(92vw, 520px);
+      height:340px;
+      margin:0 auto 18px;
+      transform-style:preserve-3d;
+    }
+
+    /* Envelope body */
+    .body{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, #ffd6ea, #ffc2e0);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    /* Decorative stripes */
+    .body::after{
+      content:""; position:absolute; inset:0;
+      background:
+        repeating-linear-gradient(135deg,
+          rgba(255,255,255,.0) 0 10px,
+          rgba(255,255,255,.15) 10px 20px);
+      pointer-events:none;
+      mix-blend-mode:soft-light;
+    }
+
+    /* Top flap */
+    .flap{
+      position:absolute; left:0; right:0; top:0; height:55%;
+      transform-origin: top center; transform:rotateX(0deg);
+      background: linear-gradient(180deg, #ff91c2, #ff6fa9);
+      border-top-left-radius: var(--radius);
+      border-top-right-radius: var(--radius);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      box-shadow: inset 0 -8px 20px rgba(0,0,0,.10);
+      transition: transform .9s cubic-bezier(.2,.8,.2,1);
+      z-index:3;
+    }
+
+    /* Letter (hidden inside) */
+    .letter{
+      position:absolute; left:6%; right:6%; bottom:10px; top:28%;
+      background: var(--paper);
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+      transform: translateY(38%);
+      transition: transform 1s cubic-bezier(.16,.84,.27,1);
+      overflow:hidden;
+      z-index:2;
+      display:flex; align-items:center; justify-content:center;
+      padding: 18px;
+    }
+
+    .stamp{
+      position:absolute; right:16px; top:12px;
+      width:64px; height:64px; border-radius:12px;
+      background: conic-gradient(from 0deg, #ff6fa9, #ffd6ea, #ff6fa9);
+      filter: saturate(120%);
+      box-shadow: inset 0 0 0 4px #fff7fb, inset 0 0 0 6px #ffadd0, 0 4px 12px rgba(0,0,0,.15);
+    }
+
+    .seal{
+      position:absolute; left:50%; top:52%; transform:translate(-50%,-50%);
+      width:80px; height:80px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #ffd1e7, #ff8abf);
+      box-shadow: 0 6px 18px rgba(0,0,0,.2);
+      z-index:4;
+      display:grid; place-items:center;
+      color:white; font-size:26px; font-weight:900; letter-spacing:.5px;
+      text-shadow: 0 2px 6px rgba(0,0,0,.25);
+      cursor:pointer;
+      transition: transform .12s ease;
+    }
+    .seal:active{ transform: translate(-50%,-50%) scale(.97); }
+
+    /* Letter inner content */
+    .note{
+      max-width: 520px; margin:auto; text-align:center; padding: 16px 18px 26px;
+    }
+    .note h2{ margin:6px 0 6px; font-size:clamp(22px, 3.5vw, 30px); }
+    .note p{ margin:6px 0 14px; font-size:clamp(15px, 2.6vw, 18px); line-height:1.5; }
+    .note .cta{
+      margin-top:10px; display:inline-block; padding:12px 18px;
+      background: linear-gradient(180deg, var(--accent), #ff4f9a);
+      color:white; text-decoration:none; border-radius:14px; font-weight:700;
+      box-shadow: 0 8px 18px rgba(255, 79, 154, .35);
+      transition: transform .12s ease;
+    }
+    .note .cta:active{ transform: translateY(1px); }
+
+    .photo{
+      width:min(90%, 360px); border-radius:18px; display:block; margin:10px auto 2px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12);
+    }
+
+    /* Opened state */
+    .opened .flap{ transform: rotateX(160deg); }
+    .opened .letter{ transform: translateY(-6%); }
+    .opened .seal{ opacity:0; pointer-events:none; }
+
+    /* Floating hearts */
+    .hearts{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:999; }
+    .heart{
+      position:absolute; font-size:22px; opacity:0; will-change: transform, opacity;
+      animation: floatUp 3.4s ease-in forwards;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.15));
+    }
+    @keyframes floatUp{
+      0%{ transform: translateY(10px) scale(.9) rotate(0deg); opacity:0; }
+      10%{ opacity:1; }
+      100%{ transform: translateY(-120vh) scale(1.2) rotate(12deg); opacity:0; }
+    }
+
+    /* Footer tip */
+    .tip{ font-size:14px; opacity:.7;}
+
+    @media (max-width:480px){
+      .envelope{ height:300px; }
+      .seal{ width:70px; height:70px; font-size:22px; }
+    }
+  </style>
 </head>
 <body>
-  <main class="app" id="app">
-    <h1>how well do you know rema</h1>
-    <p class="sub">three quick questions. no pressure… okay, a little pressure 😇</p>
+  <div class="wrap">
+    <h1>Open me, cutie 💌</h1>
+    <p class="sub">Tap the seal to see your message.</p>
 
-    <!-- Page 0: Welcome -->
-    <section class="page active" id="page-welcome" aria-labelledby="start-title">
-      <div class="card">
-        <h2 id="start-title" style="margin-top:0">ready to play?</h2>
-        <p>click start, pick one answer per question, then see how you did at the end.</p>
-      </div>
-      <div class="btnrow">
-        <button class="primary" id="startBtn" type="button">Start</button>
-      </div>
-    </section>
+    <div class="scene">
+      <div class="envelope" id="envelope">
+        <div class="body"></div>
+        <div class="flap" aria-hidden="true"></div>
+        <div class="seal" id="seal" role="button" aria-label="Open letter" tabindex="0">💖</div>
+        <div class="letter" aria-live="polite">
+          <div class="note">
+            <!--
+              ✏️ Customize me:
+              - Change the h2/p text below.
+              - Replace the image src with your own GIF/photo (optional).
+              - Update the CTA link (or remove the button).
+            -->
+            <h2>Hi, you. Yes, you. 😘</h2>
+            <p>
+              I was just thinking… you might be my favorite notification. 
+              If you’re free later, I owe you one (1) forehead kiss and unlimited compliments.
+            </p>
 
-    <!-- Page 1..3: Questions will render here -->
-    <section class="page" id="page-question">
-      <div class="progress" id="progress"></div>
-      <div class="card">
-        <p class="qtext" id="qtext"></p>
-        <div class="answers" id="answers"></div>
-        <div class="hint" id="hint">choose an option to continue</div>
-      </div>
-      <div class="btnrow">
-        <button class="ghost" id="backBtn" type="button">Back</button>
-        <button class="primary" id="nextBtn" type="button">Next</button>
-      </div>
-    </section>
+            <!-- Optional cute GIF / photo -->
+            <img class="photo" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHU2NWRyOXlndTF4eWt3d21kY3ZpZzV3eWc0amU0cDFyMnNudGQ5aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oriO0OEd9QIDdllqo/giphy.gif" alt="Cute animated hearts" />
 
-    <!-- Page 4: Result -->
-    <section class="page" id="page-result">
-      <div class="card">
-        <h2 style="margin-top:0">final score</h2>
-        <p class="progress" id="summary"></p>
-        <div id="resultBox" class="result"></div>
+            <a class="cta" href="#" onclick="alert('Date accepted 💕'); return false;">Accept my date</a>
+          </div>
+        </div>
       </div>
-      <div class="btnrow">
-        <button class="ghost" id="retryBtn" type="button">Try again</button>
-      </div>
-      <footer>made with 💖 for you</footer>
-    </section>
-  </main>
+    </div>
 
-<script>
-  // --- quiz data: 3 questions, 3 options each, exactly one correctIndex
-  const quiz = [
-    {
-      text: "what’s my go-to comfort snack?",
-      options: ["spicy chips", "chocolate anything", "ice cream"],
-      correctIndex: 1
-    },
-    {
-      text: "ideal date night?",
-      options: ["cook together + movie", "club until 3am", "gym & meal prep"],
-      correctIndex: 0
-    },
-    {
-      text: "which daily love language hits hardest?",
-      options: ["surprise gifts", "texts/calls checking on me", "public compliments"],
-      correctIndex: 1
+    <p class="tip">Pro tip: add your own message and photo/GIF in the code comments.</p>
+  </div>
+
+  <div class="hearts" aria-hidden="true" id="hearts"></div>
+
+  <script>
+    const seal = document.getElementById('seal');
+    const envelope = document.getElementById('envelope');
+    const heartsLayer = document.getElementById('hearts');
+    let opened = false;
+
+    function openLetter(){
+      if(opened) return;
+      opened = true;
+      envelope.classList.add('opened');
+      releaseHearts(42); // sprinkle love
     }
-  ];
 
-  // --- state
-  let step = 0;                 // 0 welcome, 1..3 questions, 4 result
-  let answers = new Array(quiz.length).fill(null);
+    function handleKey(e){ if((e.key === 'Enter' || e.key === ' ') && !opened){ openLetter(); } }
 
-  // --- elements
-  const pages = {
-    welcome: document.getElementById('page-welcome'),
-    question: document.getElementById('page-question'),
-    result: document.getElementById('page-result')
-  };
-  const qtext = document.getElementById('qtext');
-  const answersWrap = document.getElementById('answers');
-  const progress = document.getElementById('progress');
-  const hint = document.getElementById('hint');
-  const resultBox = document.getElementById('resultBox');
-  const summary = document.getElementById('summary');
-  const app = document.getElementById('app');
+    seal.addEventListener('click', openLetter);
+    seal.addEventListener('keydown', handleKey);
 
-  // --- navigation helpers
-  function showPage(which){
-    Object.values(pages).forEach(p => p.classList.remove('active'));
-    which.classList.add('active');
-  }
-
-  function renderQuestion(index){
-    const q = quiz[index];
-    progress.textContent = `question ${index+1} of ${quiz.length}`;
-    qtext.textContent = q.text;
-
-    // build radio options
-    answersWrap.innerHTML = '';
-    q.options.forEach((opt, i) => {
-      const id = `q${index}-opt${i}`;
-      const label = document.createElement('label');
-      label.setAttribute('for', id);
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = `q${index}`;
-      input.id = id;
-      input.value = i;
-      if (answers[index] === i) input.checked = true;
-
-      label.appendChild(input);
-      label.appendChild(document.createTextNode(opt));
-      answersWrap.appendChild(label);
-    });
-
-    // back/next text
-    document.getElementById('backBtn').textContent = index === 0 ? 'Back' : 'Back';
-    document.getElementById('nextBtn').textContent = index === quiz.length - 1 ? 'Finish' : 'Next';
-    hint.style.display = 'none';
-  }
-
-  function goToStep(newStep){
-    step = newStep;
-    if (step === 0){
-      showPage(pages.welcome);
-    } else if (step >= 1 && step <= quiz.length){
-      showPage(pages.question);
-      renderQuestion(step - 1);
-    } else {
-      // result
-      const score = scoreQuiz();
-      const total = quiz.length;
-      const pct = Math.round((score/total)*100);
-      summary.textContent = `you scored ${score}/${total} (${pct}%).`;
-
-      resultBox.style.display = 'block';
-      if (score === total){
-        resultBox.className = 'result good';
-        resultBox.textContent = "🎉 perfect! you know me so well. you win a date of your choice 💐";
-        burstHearts();
-      } else if (score >= 2){
-        resultBox.className = 'result ok';
-        resultBox.textContent = "😊 good job! you know me pretty well. bonus points for effort 💌";
-      } else {
-        resultBox.className = 'result bad';
-        resultBox.textContent = "😅 cute try… we clearly need more dates so you can study 😜";
+    function releaseHearts(count){
+      const emojis = ['💖','💗','💞','💘','💓','💝','💕'];
+      const w = window.innerWidth; const h = window.innerHeight;
+      for(let i=0;i<count;i++){
+        const span = document.createElement('span');
+        span.className = 'heart';
+        span.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        const startX = Math.random() * w;
+        const delay = (Math.random()*0.8).toFixed(2);
+        const size = 18 + Math.random()*22;
+        span.style.left = startX + 'px';
+        span.style.bottom = '-20px';
+        span.style.fontSize = size + 'px';
+        span.style.animationDelay = delay + 's';
+        heartsLayer.appendChild(span);
+        setTimeout(()=> span.remove(), 4200);
       }
-      showPage(pages.result);
     }
-  }
 
-  function scoreQuiz(){
-    return answers.reduce((acc, ans, i) => acc + (ans === quiz[i].correctIndex ? 1 : 0), 0);
-  }
-
-  // --- confetti hearts for perfect score
-  function burstHearts(){
-    for (let i=0;i<16;i++){
-      const h = document.createElement('div');
-      h.className = 'heart';
-      const x = 50 + (Math.random()*40 - 20); // %
-      const y = 55 + (Math.random()*10 - 5);  // %
-      h.style.left = x + '%';
-      h.style.top = y + '%';
-      h.style.filter = `hue-rotate(${Math.random()*60 - 30}deg)`;
-      app.appendChild(h);
-      setTimeout(()=>h.remove(), 1200);
-    }
-  }
-
-  // --- wire buttons
-  document.getElementById('startBtn').addEventListener('click', () => goToStep(1));
-  document.getElementById('backBtn').addEventListener('click', () => {
-    if (step > 1) goToStep(step - 1);
-    else goToStep(0);
-  });
-  document.getElementById('nextBtn').addEventListener('click', () => {
-    const qIndex = step - 1;
-    const selected = document.querySelector(`input[name="q${qIndex}"]:checked`);
-    if (!selected){
-      hint.style.display = 'block';
-      return;
-    }
-    answers[qIndex] = Number(selected.value);
-    goToStep(step + 1);
-  });
-  document.getElementById('retryBtn').addEventListener('click', () => {
-    answers = new Array(quiz.length).fill(null);
-    resultBox.style.display = 'none';
-    goToStep(0);
-  });
-
-  // deep link support: #/1, #/2, ...
-  window.addEventListener('hashchange', () => {
-    const hash = location.hash.replace('#/','');
-    const n = parseInt(hash, 10);
-    if (!isNaN(n) && n >= 0 && n <= quiz.length+1) goToStep(n);
-  });
-  // update hash when step changes
-  const _goToStep = goToStep;
-  goToStep = function(s){ _goToStep(s); location.hash = `/${s}`; }
-  // init
-  goToStep(0);
-</script>
+    // Optional: subtle entrance reveal
+    document.addEventListener('DOMContentLoaded', ()=>{
+      setTimeout(()=>{
+        releaseHearts(10);
+      }, 600);
+    });
+  </script>
 </body>
 </html>
