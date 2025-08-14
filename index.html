@@ -66,11 +66,12 @@
       background: var(--paper);
       border-radius: 18px;
       box-shadow: 0 12px 30px rgba(0,0,0,.12);
-      transform: translateY(38%);
+      transform: translateY(100%);
       transition: transform 1s cubic-bezier(.16,.84,.27,1);
       overflow:hidden;z-index:2;
       display:flex;align-items:center;justify-content:center;
       padding: 20px;
+      visibility:hidden;
     }
     .seal{
       position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
@@ -97,7 +98,7 @@
     }
     .cta:active{ transform: translateY(1px); }
     .opened .flap{ transform: rotateX(160deg); }
-    .opened .letter{ transform: translateY(-6%); }
+    .opened .letter{ transform: translateY(-6%); visibility:visible; }
     .opened .seal{ opacity:0;pointer-events:none; }
     .hearts{ position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:999; }
     .heart{ position:absolute;font-size:22px;opacity:0;animation: floatUp 3.4s ease-in forwards;filter: drop-shadow(0 6px 10px rgba(0,0,0,.15)); }
@@ -118,7 +119,7 @@
         <div class="letter" aria-live="polite">
           <div class="note">
             <h2>Hi</h2>
-            <p>I just wanted to let you know that you’re annoying, but you’re my favorite person and I love you  ❤️</p>
+            <p>I just wanted to let you know that you’re annoying, but you’re my favorite person and I love you. ❤️</p>
             <img class="photo" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute cat gif" />
             <a class="cta" href="#" onclick="alert('Love accepted 💕'); return false;">Accept my love</a>
           </div>
